@@ -10,6 +10,12 @@ public class Artist{
         label = "Death Metal Records";
     }
 
+    public Artist(String genre, String label){
+        location = new Location();
+        this.genre = genre;
+        this.label = label;
+    }
+
     public Artist(String genre,String label,String destination,String date,String section,Double price){
         location = new Location(destination,date,section,price);
         this.genre = genre;
@@ -24,8 +30,8 @@ public class Artist{
         this.label = label;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocation(String destination, String date) {
+        getLocation().setLocation(destination, date);
     }
 
     public String getGenre() {
