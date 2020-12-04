@@ -61,12 +61,10 @@ public class Artist{
     }
 
     public String toString(){
-        String output = String.format("genre is %1s and are signed with %1s. Their tour locations and dates are as follows: %1s",genre,label,locations );
-        output = output.replace("=", " on ");
+        String output = String.format("'s genre is %1s and are signed with %1s. Their tour locations and dates are as follows: %1s",genre,label,locations );
+        output = output.replace("=", " on ").replace("_", " ");
         return output;
     }
-
-  
 
     public boolean international(String currentLocation, String eventLocation){
         if(currentLocation.equals(eventLocation))
