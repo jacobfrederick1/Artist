@@ -16,36 +16,47 @@ public class Artists{
 
     //reads in artist from a file and creates an Artist object for each non duplicate
     public String process(String dataFile){
+        String statements = "";
         try{
             File infile = new File(dataFile);
             Scanner input = new Scanner(infile);
-            String statements = "";
             while(input.hasNext()){
-                String artist = input.next();
+                String artist = input.next().toLowerCase();
                 if(!exist(artist)){
                     artists.put(artist,new Artist(input.next(),input.next(),input.next(),input.next()));
                     statements += artist + " was successfully added\n";
                 }
                 else{
-                    statements += artist + "was already added\n";
+                    statements += artist + " was already added\n";
                 }
             }
             input.close();
-            return statements;
         }
         catch(FileNotFoundException exception){
             return "Error file not found";
         }
+        return statements + " " + artists  ;
     }
 
     //adds an artist to artists with a default Artist constructor.
     public String addArtist(String name){
         if(!exist(name)){
             artists.put(name,new Artist());
-            result = name + "was successfully added";
+            result = name + " was successfully added";
         }
         else{
-            result = name + "was already added";
+            result = name + " was already added";
+        }
+        return result;
+    }
+
+    public String addArtist(String name, Artist information){
+        if(!exist(name)){
+            artists.put(name,information);
+            result = name + " was successfully added";
+        }
+        else{
+            result = name + " was already added";
         }
         return result;
     }
@@ -57,7 +68,7 @@ public class Artists{
             result = name + "'s values have been updates";
         }
         else{
-            result = name + "could not be changed because it does not exist";
+            result = name + "'s values could not be changed because it does not exist";
         }
         return result;
     }
@@ -65,10 +76,10 @@ public class Artists{
     //retuns the artist object
     public String getArtist(String name){
         if(exist(name)){
-            artists.get(name);
+            return name + artists.get(name).toString();
         }
         else{
-            result = name + "is not accessable";
+            result = name + " is not accessable";
         }
         return result;
     }
@@ -80,7 +91,7 @@ public class Artists{
 
     //returns a set of all the artist
     public Set<String> getArtistKeysSet(){
-        return artists.keySet();
+        return  artists.keySet();
     }
 
     //returns all of the values in artists
