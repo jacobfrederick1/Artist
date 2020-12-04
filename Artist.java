@@ -1,23 +1,22 @@
+import java.util.*;
 public class Artist{
 
     private String genre;
     private String label;
-    private Location location;
+    private Map<String,String> locations;
+
+
 
     public Artist(){
-        location = new Location();
+        locations = new HashMap<>();
+        locations.put("United States","1/12/2020");
         genre = "Metal";
         label = "Death Metal Records";
     }
 
-    public Artist(String genre, String label){
-        location = new Location();
-        this.genre = genre;
-        this.label = label;
-    }
-
-    public Artist(String genre,String label,String destination,String date,String section,Double price){
-        location = new Location(destination,date,section,price);
+    public Artist(String genre,String label, String location,String date){
+        locations = new HashMap<>();
+        locations.put(location,date);
         this.genre = genre;
         this.label = label;
     }
@@ -30,8 +29,11 @@ public class Artist{
         this.label = label;
     }
 
-    public void setLocation(String destination, String date) {
-        getLocation().setLocation(destination, date);
+    public void addLocation(String destination, String date) {
+        locations.put(destination,date);
+    }
+    public void setDate(String area, String date){
+        locations.replace(area, date);
     }
 
     public String getGenre() {
@@ -42,8 +44,33 @@ public class Artist{
         return label;
     }
 
-    public Location getLocation() {
-        return location;
+    public Set<String> getLocation() {
+        return locations.keySet();
     }
 
+    public Map<String,String> getLocations(){
+        return locations;
+    }
+
+    public String getDate(String area){
+        return locations.get(area);
+    }
+
+    public Collection<String> getDates(){
+        return locations.values();
+    }
+
+    public String toString(){
+        String output = String.format("genre is %1s and are signed with %1s. Their tour locations and dates are as follows: %1s",genre,label,locations );
+        output = output.replace("=", " on ");
+        return output;
+    }
+
+  
+
+    public boolean international(String currentLocation, String eventLocation){
+        if(currentLocation.equals(eventLocation))
+            return false;
+        return true;
+    }   
 }
