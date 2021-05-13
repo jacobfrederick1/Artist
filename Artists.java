@@ -10,11 +10,19 @@ public class Artists{
     private Map<String,Artist> artists;
     String result = "";
 
+    /**
+     * initializes artists map
+     */
     public Artists(){
         artists = new HashMap<>();
     }
 
-    //reads in artist from a file and creates an Artist object for each non duplicate
+    /**
+     * process method reads in a file and adds the information to a hashmap
+     * the hashmap uses an artist name as a key and the following information is sent to Artist
+     * @param dataFile the name of the file being read in
+     * @return a string stating wether or not the file was sucsessfully read.
+     */
     public String process(String dataFile){
         String statements = "";
         try{
@@ -38,7 +46,11 @@ public class Artists{
         return statements + " " + artists  ;
     }
 
-    //adds an artist to artists with a default Artist constructor.
+    /**
+     * addArtist method adds a new artist to the hashMap if they do not exist
+     * @param name the name of the artist wanting to be added
+     * @return a string stating wether or not the artist is already in the hashmap
+     */
     public String addArtist(String name){
         if(!exist(name)){
             artists.put(name,new Artist());
@@ -50,6 +62,12 @@ public class Artists{
         return result;
     }
 
+    /**
+     * 
+     * @param name the name of the artist wanting to be added
+     * @param information uses default constructor from Artist class to give the new artist default information
+     * @return a string stating wether or not the artist was already in the hashmap
+     */
     public String addArtist(String name, Artist information){
         if(!exist(name)){
             artists.put(name,information);
@@ -61,7 +79,15 @@ public class Artists{
         return result;
     }
     
-    //updates all values for an artist
+    /**
+     * updates all of the values for an artist
+     * @param name the name of the artist
+     * @param genre the genre of the artist
+     * @param label what label the artist is signed with
+     * @param location the location the artist is playing
+     * @param date the day the artist is performing
+     * @return a string stating wether or not the artist information was successfully updates
+     */
     public String changeValue(String name,String genre,String label,String location,String date){
         if(exist(name)){
             artists.replace(name, artists.get(name), new Artist(genre,label,location,date));
@@ -73,7 +99,11 @@ public class Artists{
         return result;
     }
 
-    //retuns the artist object
+    /**
+     * getArtist returns the the information for a particular artist
+     * @param name the name of the artist whose information is to be displayed
+     * @return the information about the artist such as genre, label and day and locations of upcoming performances.
+     */
     public String getArtist(String name){
         if(exist(name)){
             return name + artists.get(name).toString();
@@ -84,17 +114,27 @@ public class Artists{
         return result;
     }
 
-    //returns a map of the artist
+
+    /**
+     * getArtists returns a specified artist
+     * @return the information about the artist
+     */
     public Map<String, Artist> getArtists() {
         return artists;
     }
 
-    //returns a set of all the artist
+    /**
+     * returns all of the artist in the hashmap
+     * @return a set containing all of the artist names
+     */
     public Set<String> getArtistKeysSet(){
         return  artists.keySet();
     }
 
-    //returns all of the values in artists
+    /**
+     * getArtistValues returns the information about an artist.
+     * @return
+     */
     public Collection getArtistValues(){
         return artists.values();
     }
@@ -111,7 +151,11 @@ public class Artists{
         return result;
     }
 
-    //test if an artist exist
+    /**
+     * exist test a name against the hashmap to see if they exist
+     * @param name the name of the artist
+     * @return boolean value stating wether or not the name was in the hashmap
+     */
     public boolean exist(String name){
         if(artists.containsKey(name))
             return true;
@@ -119,6 +163,9 @@ public class Artists{
             return false;
     }
 
+    /**
+     * @return returns a string of the artists hashmap
+     */
     public String toString() {
         return "" + artists;
     }
